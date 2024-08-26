@@ -39,8 +39,8 @@ Before executing these commands, ensure the following prerequisites are met:
 2. Visualize abundace using bar plot
 3. Detect duplicate  amr gennes in all sample identity 75%, 90%
   * detect pathogen and their amr genes
-  *Get amr ontology using card database
-  *get amr drug tpm abundace table
+  * Get amr ontology using card database
+  * get amr drug tpm abundace table
 4. Build phylogeny tree of pathogen detected
 5. Abundance different analysis
 
