@@ -9,3 +9,7 @@ Before executing these commands, ensure the following prerequisites are met:
   * The necessary data files for the mag and funcscan workflow are accessible.
   * before run this pipeline you have to run requirements.py to install third-party software for this analysis.
 
+## Open Notebooks in Google Colab
+
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/username/repository-name/blob/main/notebooks/notebook1.ipynb) Notebook 1
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/username/repository-name/blob/main/notebooks/notebook2.ipynb) Notebook 2
