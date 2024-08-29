@@ -1,0 +1,17 @@
+input: 'path/to/samplesheet_funcscan.csv'
+outdir: 'path/to/output_funcscan'
+run_amp_screening: true
+run_arg_screening: true
+run_bgc_screening: true
+annotation_tool: 'prodigal'
+save_annotations: true
+amp_skip_hmmsearch: true
+amp_skip_macrel: true
+arg_skip_amrfinderplus: true
+arg_deeparg_model: 'SS'
+arg_skip_fargene: true
+arg_skip_rgi: true
+arg_skip_abricate: true
+bgc_skip_deepbgc: true
+bgc_skip_gecco: true
+bgc_skip_hmmsearch: true
