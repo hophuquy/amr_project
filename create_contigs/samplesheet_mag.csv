@@ -1,0 +1,4 @@
+sample,group,short_reads_1,short_reads_2,long_read
+sample1,1,data/sample1_R1.fastq.gz,data/sample1_R2.fastq.gz,
+sample2,2,data/sample2_R1.fastq.gz,data/sample2_R2.fastq.gz,
+sample3,3,data/sample3_R1.fastq.gz,data/sample3_R2.fastq.gz,
