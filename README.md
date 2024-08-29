@@ -1,5 +1,5 @@
 # amr_project
-![image](https://github.com/user-attachments/assets/3f36c275-476b-47d3-9718-39da0aa4fbc0)
+![image](https://github.com/hophuquy/amr_project/blob/main/Soil_pipeline.png)
 Prerequisites
 Before executing these commands, ensure the following prerequisites are met:
   * ǹextflow is installed on your system.
