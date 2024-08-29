@@ -1,0 +1,8 @@
+input: 'path/to/samplesheet_mag.csv'
+outdir: 'path/to/output_mag'
+genomad_db: '/media/lucianhu/29478145-8054-4fe3-900a-af5bbccd11092/microbiome_database/genomad_db'
+megahit_options: '--presets meta-large'
+skip_spades: true
+skip_quast: true
+run_virus_identification: true
+skip_binning: true
