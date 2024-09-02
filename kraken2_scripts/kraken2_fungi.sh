@@ -50,7 +50,7 @@ while IFS= read -r SAMPLE; do
     fi
 done < "$SAMPLE_LIST"
 
-# Step 3: Process kreport2mpa.py for each sample
+# Process kreport2mpa.py for each sample
 cd "$OUTPUT_DIR/fungi" || { echo "Cannot change directory to $OUTPUT_DIR/fungi"; exit 1; }
 while IFS= read -r SAMPLE; do
     echo "Processing kreport2mpa for $SAMPLE ..."
