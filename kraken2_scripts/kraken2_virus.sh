@@ -3,7 +3,7 @@
 # Define paths and parameters
 KRAKEN2_DB="/path/to/virus_db"
 INPUT_DIR="/path/to/contigs"
-OUTPUT_DIR="/path/to/virus"
+OUTPUT_DIR="/path/to/kraken2"
 SAMPLE_LIST="$INPUT_DIR/sample_list.txt" 
 
 # Remove the sample list file if it already exists
