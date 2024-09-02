@@ -54,6 +54,6 @@ done < "$SAMPLE_LIST"
 cd "$OUTPUT_DIR/kraken2_fungi" || { echo "Cannot change directory to $OUTPUT_DIR/kraken2_fungi"; exit 1; }
 while IFS= read -r SAMPLE; do
     echo "Processing kreport2mpa for $SAMPLE ..."
-    /home/lucianhu/AMR/fungi/kreport2mpa.py -r "${SAMPLE}.fungi.kraken2.report" --display-header -o "${SAMPLE}.fungi.kraken2.mpa"
+    kreport2mpa.py -r "${SAMPLE}.fungi.kraken2.report" --display-header -o "${SAMPLE}.fungi.kraken2.mpa"
     tail -n+2 "${SAMPLE}.fungi.kraken2.mpa" | cut -f 2 | sed "1 s/^/${SAMPLE} /" > "${SAMPLE}.fungi.kraken2.count"
 done < "$SAMPLE_LIST"
