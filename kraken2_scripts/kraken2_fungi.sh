@@ -54,6 +54,9 @@ done < "$SAMPLE_LIST"
 cd "$OUTPUT_DIR/fungi" || { echo "Cannot change directory to $OUTPUT_DIR/fungi"; exit 1; }
 while IFS= read -r SAMPLE; do
     echo "Processing kreport2mpa for $SAMPLE ..."
-    kreport2mpa.py -r "${SAMPLE}.fungi.kraken2.report" --display-header -o "${SAMPLE}.fungi.kraken2.mpa"
-    tail -n+2 "${SAMPLE}.fungi.kraken2.mpa" | cut -f 2 | sed "1 s/^/${SAMPLE} /" > "${SAMPLE}.fungi.kraken2.count"
+    python kreport2mpa.py -r "${SAMPLE}.fungi.kraken2.report" --display-header -o "${SAMPLE}.fungi.kraken2.mpa"    
 done < "$SAMPLE_LIST"
+
+# Combine all MPA reports into a single summary file
+cd "$OUTPUT_DIR/fungi" || { echo "Cannot change directory to $OUTPUT_DIR/fungi"; exit 1; }
+python combine_mpa.py -i *.fungi.kraken2.mpa -o summary.fungi.kraken2.mpa
