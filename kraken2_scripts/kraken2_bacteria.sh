@@ -38,27 +38,26 @@ while IFS= read -r SAMPLE; do
 
         echo "Running Kraken2 on $fa_file ..."
         
-        # Run Kraken2 with specified options to classify the sequences in each sample
-        kraken2 --db "$KRAKEN2_DB" \  # Specify the path to the Kraken2 database to be used for classification
-                --classified-out "$CLASSIFIED_FILE" \  # Output the sequences that are classified by Kraken2 to this file
-                --output "$OUTPUT_FILE" \  # Save the detailed classification results (sequence ID, taxonomic ID, etc.) to this file
-                --confidence 0.001 \  # Set the confidence threshold for classification; Kraken2 requires at least 0.1% confidence to make a classification
-                --report "$REPORT_FILE" \  # Generate a report summarizing the classification results at various taxonomic levels (e.g., species, genus)
-                --memory-mapping \  # Enable memory mapping of the Kraken2 database to reduce memory usage by accessing parts of the database from disk as needed
-                --gzip-compressed "$fa_file"  # Indicate that the input file is gzip-compressed; Kraken2 will decompress it on the fly during processing
-
+        # Run Kraken2 with specified options, including database, confidence threshold, and output files
+        kraken2 --db "$KRAKEN2_DB" \
+                --classified-out "$CLASSIFIED_FILE" \
+                --output "$OUTPUT_FILE" \
+                --confidence 0.001 \
+                --report "$REPORT_FILE" \
+                --memory-mapping \
+                --gzip-compressed "$fa_file"
     else
         # If the .fa.gz file does not exist, skip processing for that sample
         echo "File $fa_file does not exist. Skipping..."
     fi
 done < "$SAMPLE_LIST"
 
-# Step 3: Process the Kraken2 report using kreport2mpa.py for each sample
+# Process the Kraken2 report using kreport2mpa.py for each sample
 cd "$OUTPUT_DIR/bacteria" || { echo "Cannot change directory to $OUTPUT_DIR/bacteria"; exit 1; }
 while IFS= read -r SAMPLE; do
     echo "Processing kreport2mpa for $SAMPLE ..."
     # Run kreport2mpa.py to generate an MPA-style report from the Kraken2 report
-    kreport2mpa.py -r "${SAMPLE}.bacteria.kraken2.report" --display-header -o "${SAMPLE}.bacteria.kraken2.mpa"
+    /home/lucianhu/AMR/fungi/kreport2mpa.py -r "${SAMPLE}.bacteria.kraken2.report" --display-header -o "${SAMPLE}.bacteria.kraken2.mpa"
     
     # Extract counts from the MPA report, format them, and save to a count file
     tail -n+2 "${SAMPLE}.bacteria.kraken2.mpa" | cut -f 2 | sed "1 s/^/${SAMPLE} /" > "${SAMPLE}.bacteria.kraken2.count"
