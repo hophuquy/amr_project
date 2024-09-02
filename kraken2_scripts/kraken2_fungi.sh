@@ -3,7 +3,7 @@
 # Define paths and parameters
 KRAKEN2_DB="/path/to/fungi_db"
 INPUT_DIR="/path/to/contigs"
-OUTPUT_DIR="/path/to/fungi"
+OUTPUT_DIR="/path/to/kraken2"
 SAMPLE_LIST="$INPUT_DIR/sample_list.txt"
 
 # Remove the sample list file if it already exists
@@ -23,7 +23,7 @@ sort -u "$SAMPLE_LIST" -o "$SAMPLE_LIST"
 echo "Sample list created: $SAMPLE_LIST"
 
 # Create output directory if it does not exist
-mkdir -p "$OUTPUT_DIR/kraken2_fungi"
+mkdir -p "$OUTPUT_DIR/fungi"
 
 # Process each sample listed in SAMPLE_LIST
 while IFS= read -r SAMPLE; do
@@ -31,9 +31,9 @@ while IFS= read -r SAMPLE; do
 
     if [[ -f "$fa_file" ]]; then
         # Define output and report file paths
-        CLASSIFIED_FILE="$OUTPUT_DIR/kraken2_fungi/${SAMPLE}.classified-fungi.fa"
-        OUTPUT_FILE="$OUTPUT_DIR/kraken2_fungi/${SAMPLE}.fungi.kraken2"
-        REPORT_FILE="$OUTPUT_DIR/kraken2_fungi/${SAMPLE}.fungi.kraken2.report"
+        CLASSIFIED_FILE="$OUTPUT_DIR/fungi/${SAMPLE}.classified-fungi.fa"
+        OUTPUT_FILE="$OUTPUT_DIR/fungi/${SAMPLE}.fungi.kraken2"
+        REPORT_FILE="$OUTPUT_DIR/fungi/${SAMPLE}.fungi.kraken2.report"
 
         echo "Running Kraken2 on $fa_file ..."
         
@@ -51,7 +51,7 @@ while IFS= read -r SAMPLE; do
 done < "$SAMPLE_LIST"
 
 # Step 3: Process kreport2mpa.py for each sample
-cd "$OUTPUT_DIR/kraken2_fungi" || { echo "Cannot change directory to $OUTPUT_DIR/kraken2_fungi"; exit 1; }
+cd "$OUTPUT_DIR/fungi" || { echo "Cannot change directory to $OUTPUT_DIR/fungi"; exit 1; }
 while IFS= read -r SAMPLE; do
     echo "Processing kreport2mpa for $SAMPLE ..."
     kreport2mpa.py -r "${SAMPLE}.fungi.kraken2.report" --display-header -o "${SAMPLE}.fungi.kraken2.mpa"
