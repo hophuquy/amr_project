@@ -55,5 +55,8 @@ cd "$OUTPUT_DIR/virus" || { echo "Cannot change directory to $OUTPUT_DIR/virus";
 while IFS= read -r SAMPLE; do
     echo "Processing kreport2mpa for $SAMPLE ..."
     kreport2mpa.py -r "${SAMPLE}.virus.kraken2.report" --display-header -o "${SAMPLE}.virus.kraken2.mpa"
-    tail -n+2 "${SAMPLE}.virus.kraken2.mpa" | cut -f 2 | sed "1 s/^/${SAMPLE} /" > "${SAMPLE}.virus.kraken2.count"
 done < "$SAMPLE_LIST"
+
+# Combine all MPA reports into a single summary file
+cd "$OUTPUT_DIR/virus" || { echo "Cannot change directory to $OUTPUT_DIR/virus"; exit 1; }
+python combine_mpa.py -i *.virus.kraken2.mpa -o summary.virus.kraken2.mpa
