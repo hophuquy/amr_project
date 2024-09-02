@@ -23,7 +23,7 @@ sort -u "$SAMPLE_LIST" -o "$SAMPLE_LIST"
 echo "Sample list created: $SAMPLE_LIST"
 
 # Create output directory if it does not exist
-mkdir -p "$OUTPUT_DIR/kraken2_virus"
+mkdir -p "$OUTPUT_DIR/virus"
 
 # Process each sample listed in SAMPLE_LIST
 while IFS= read -r SAMPLE; do
@@ -31,9 +31,9 @@ while IFS= read -r SAMPLE; do
 
     if [[ -f "$fa_file" ]]; then
         # Define output and report file paths
-        CLASSIFIED_FILE="$OUTPUT_DIR/kraken2_virus/${SAMPLE}.classified-virus.fa"
-        OUTPUT_FILE="$OUTPUT_DIR/kraken2_virus/${SAMPLE}.virus.kraken2"
-        REPORT_FILE="$OUTPUT_DIR/kraken2_virus/${SAMPLE}.virus.kraken2.report"
+        CLASSIFIED_FILE="$OUTPUT_DIR/virus/${SAMPLE}.classified-virus.fa"
+        OUTPUT_FILE="$OUTPUT_DIR/virus/${SAMPLE}.virus.kraken2"
+        REPORT_FILE="$OUTPUT_DIR/virus/${SAMPLE}.virus.kraken2.report"
 
         echo "Running Kraken2 on $fa_file ..."
         
@@ -51,7 +51,7 @@ while IFS= read -r SAMPLE; do
 done < "$SAMPLE_LIST"
 
 # Step 3: Process kreport2mpa.py for each sample
-cd "$OUTPUT_DIR/kraken2_virus" || { echo "Cannot change directory to $OUTPUT_DIR/kraken2_virus"; exit 1; }
+cd "$OUTPUT_DIR/virus" || { echo "Cannot change directory to $OUTPUT_DIR/virus"; exit 1; }
 while IFS= read -r SAMPLE; do
     echo "Processing kreport2mpa for $SAMPLE ..."
     kreport2mpa.py -r "${SAMPLE}.virus.kraken2.report" --display-header -o "${SAMPLE}.virus.kraken2.mpa"
