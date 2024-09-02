@@ -4,7 +4,7 @@
 KRAKEN2_DB="/path/to/virus_db"
 INPUT_DIR="/path/to/contigs"
 OUTPUT_DIR="/path/to/virus"
-SAMPLE_LIST="$INPUT_DIR/sample_list.txt"  # Đã thay đổi để nằm trong INPUT_DIR
+SAMPLE_LIST="$INPUT_DIR/sample_list.txt" 
 
 # Remove the sample list file if it already exists
 rm -f "$SAMPLE_LIST"
