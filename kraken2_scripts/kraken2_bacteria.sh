@@ -57,8 +57,9 @@ cd "$OUTPUT_DIR/bacteria" || { echo "Cannot change directory to $OUTPUT_DIR/bact
 while IFS= read -r SAMPLE; do
     echo "Processing kreport2mpa for $SAMPLE ..."
     # Run kreport2mpa.py to generate an MPA-style report from the Kraken2 report
-    /home/lucianhu/AMR/fungi/kreport2mpa.py -r "${SAMPLE}.bacteria.kraken2.report" --display-header -o "${SAMPLE}.bacteria.kraken2.mpa"
-    
-    # Extract counts from the MPA report, format them, and save to a count file
-    tail -n+2 "${SAMPLE}.bacteria.kraken2.mpa" | cut -f 2 | sed "1 s/^/${SAMPLE} /" > "${SAMPLE}.bacteria.kraken2.count"
+    python kreport2mpa.py -r "${SAMPLE}.bacteria.kraken2.report" --display-header -o "${SAMPLE}.bacteria.kraken2.mpa"
 done < "$SAMPLE_LIST"
+
+# Combine all MPA reports into a single summary file
+cd "$OUTPUT_DIR/bacteria" || { echo "Cannot change directory to $OUTPUT_DIR/bacteria"; exit 1; }
+python combine_mpa.py -i *.bacteria.kraken2.mpa -o summary.bacteria.kraken2.mpa
